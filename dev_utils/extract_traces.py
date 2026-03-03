@@ -35,11 +35,12 @@ def get_api_keys() -> list[str]:
 
 def print_warning_if_api_key_in_content(content: str, prefix: str) -> None:
     if prefix in content:
-        print("WARNING: Found potential API key pattern in content that was not redacted:")
+        message = f"Found potential API key pattern in content that was not redacted."
         idx = content.index(prefix)
         start = max(0, idx - 50)
         end = min(len(content), idx + 50)
-        print(f"  ...{content[start:end]}...")
+        message += f" Context: ...{content[start:end]}..."
+        raise Exception(message)
 
 def sanitize_content(content: str, api_keys: list[str]) -> str:
     """Replace any API keys found in content with a placeholder."""
@@ -47,9 +48,9 @@ def sanitize_content(content: str, api_keys: list[str]) -> str:
         content = content.replace(key, "<omitted-api-key>")
     print_warning_if_api_key_in_content(content, "sk-proj")
     print_warning_if_api_key_in_content(content, "sk-ant")
+    print_warning_if_api_key_in_content(content, "AIzaSy")
     print_warning_if_api_key_in_content(content, "sk-")
     print_warning_if_api_key_in_content(content, "hf_")
-    print_warning_if_api_key_in_content(content, "AIzaSy")
 
     return content
 
@@ -134,10 +135,8 @@ def main():
         for subdir in get_latest_subdirs(input_dir):
             # Determine source file (prefer solve_parsed.txt)
             src_file = subdir / "solve_parsed.txt"
-            solve_filename = "solve_parsed.txt"
             if not src_file.exists():
                 src_file = subdir / "solve_out.txt"
-                solve_filename = "solve_out.txt"
                 if not src_file.exists():
                     print(f"Warning: No solve_parsed.txt or solve_out.txt in {subdir}")
                     continue
@@ -148,7 +147,7 @@ def main():
             dest_dir.mkdir(parents=True, exist_ok=True)
             
             # Copy solve file with original filename
-            dest_file = dest_dir / solve_filename
+            dest_file = dest_dir / "trace.txt"
             copy_file_sanitized(src_file, dest_file, api_keys)
             print(f"Copied: {src_file} -> {dest_file}")
 
