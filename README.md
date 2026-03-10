@@ -41,11 +41,11 @@ Agents are run through one of 4 CLI scaffolds: Claude Code, Codex CLI, Gemini CL
 PostTrainBench includes 7 benchmarks spanning reasoning, tool use, knowledge, math, health, and code:
 
 1. **AIME 2025** — Math competition problems
-2. **Arena Hard** — Challenging instruction-following from Chatbot Arena
+2. **Arena Hard Writing** — Creative writing benchmark adapted from ArenaHard v2
 3. **BFCL** — Berkeley Function Calling Leaderboard (tool use)
 4. **GPQA** — Graduate-level science questions
 5. **GSM8K** — Grade school math
-6. **HealthBench** — Medical knowledge and reasoning
+6. **HealthBench Easy** — Medical knowledge and reasoning
 7. **HumanEval** — Code generation
 
 ## Quick Start
