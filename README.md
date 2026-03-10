@@ -4,7 +4,7 @@
 
 We introduce PostTrainBench, a benchmark that measures the ability of CLI agents to post-train pre-trained large language models (LLMs). In PostTrainBench, the agent's task is to improve the performance of a base LLM on a given benchmark. The agent is given access to an evaluation script and 10 hours on an H100 GPU. Performance is measured by the benchmark score of the post-trained LLM. This setup naturally evaluates an agent's ability to conduct AI R&D.
 
-> **Looking for Collaborators!** We are seeking contributors to help expand tasks and agent scaffolds. Substantial contributions can lead to co-authorship on our paper. See [Contributing](#contributing) for details.
+> **Note:** This repository is currently designed for our internal HPC cluster (HTCondor) and may require significant adaptation to run in other environments. We plan to add [Harbor](https://github.com/harbor-framework/harbor) support, which will make it straightforward to run on rented hardware (e.g., cloud GPUs).
 
 ## Leaderboard
 
@@ -14,21 +14,22 @@ Scores are weighted averages across 7 benchmarks and 4 models (Qwen3-1.7B, Qwen3
 
 | Rank | Agent | Scaffold | Avg | AIME 2025 | Arena Hard | BFCL | GPQA | GSM8K | HealthBench | HumanEval |
 |---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| - | Instruction Tuned | - | 51.1 | 29.2 | 70.2 | 85.0 | 36.2 | 87.0 | 43.3 | 71.5 |
+| - | Official Instruct Models | - | 51.1 | 29.2 | 70.2 | 85.0 | 36.2 | 87.0 | 43.3 | 71.5 |
 | 1 | Opus 4.6 | Claude Code | 23.2 | 5.0 | 7.8 | 75.9 | 25.5 | 41.0 | 18.8 | 24.7 |
-| 2 | Gemini 3.1 Pro | OpenCode | 22.3 | 3.3 | 5.5 | 82.2 | 17.4 | 33.9 | 17.7 | 42.8 |
-| 3 | GPT-5.2 | Codex CLI | 21.5 | 0.8 | 6.4 | 52.5 | 23.7 | 55.9 | 15.8 | 31.4 |
-| 4 | GPT 5.1 Codex Max | Codex CLI | 20.2 | 0.3 | 4.0 | 30.8 | 24.0 | 51.6 | 20.3 | 32.7 |
-| 5 | Gemini 3 Pro | Gemini CLI | 18.3 | 1.7 | 5.8 | 35.3 | 21.5 | 42.6 | 17.7 | 25.3 |
-| 6 | Opus 4.5 | Claude Code | 17.1 | 2.8 | 3.7 | 61.6 | 19.0 | 28.5 | 8.9 | 28.1 |
-| 7 | GPT 5.2 Codex | Codex CLI | 16.8 | 0.3 | 2.5 | 40.3 | 24.1 | 37.6 | 11.5 | 23.7 |
-| 8 | Sonnet 4.6 | Claude Code | 16.4 | 3.3 | 10.2 | 23.8 | 13.8 | 25.7 | 16.2 | 42.4 |
-| 9 | GLM 5 | OpenCode | 13.9 | 0.8 | 4.2 | 21.5 | 15.2 | 40.3 | 14.6 | 17.4 |
-| 10 | GPT 5.3 Codex | Codex CLI | 13.8 | 0.3 | 1.0 | 14.8 | 22.8 | 31.7 | 10.2 | 24.0 |
-| 11 | Sonnet 4.5 | Claude Code | 9.9 | 0.8 | 1.0 | 1.8 | 14.6 | 30.9 | 5.0 | 23.0 |
-| - | Base Model | Zero Shot | 7.5 | 1.7 | 1.3 | 1.5 | 8.5 | 20.4 | 9.5 | 12.8 |
+| 2 | Gemini 3.1 Pro | OpenCode | 21.6 | 3.9 | 7.4 | 62.8 | 18.5 | 45.5 | 14.5 | 40.2 |
+| 3 | GPT-5.2 | Codex CLI | 21.4 | 0.8 | 6.6 | 52.5 | 23.7 | 55.9 | 15.8 | 30.2 |
+| 4 | GPT 5.4 | Codex CLI | 20.2 | 0.6 | 10.1 | 31.1 | 28.0 | 48.2 | 17.3 | 27.3 |
+| 5 | GPT 5.1 Codex Max | Codex CLI | 19.7 | 0.6 | 4.0 | 30.8 | 24.0 | 51.6 | 17.8 | 32.0 |
+| 6 | Gemini 3 Pro | Gemini CLI | 18.1 | 1.7 | 6.3 | 42.3 | 21.2 | 39.1 | 17.3 | 22.7 |
+| 7 | GPT 5.3 Codex | Codex CLI | 17.8 | 0.6 | 2.4 | 45.5 | 27.7 | 33.1 | 8.9 | 29.1 |
+| 8 | GPT 5.2 Codex | Codex CLI | 17.2 | 0.3 | 2.5 | 45.2 | 24.1 | 37.6 | 11.5 | 23.8 |
+| 9 | Opus 4.5 | Claude Code | 17.1 | 2.2 | 3.8 | 61.7 | 19.0 | 28.5 | 8.9 | 29.3 |
+| 10 | Sonnet 4.6 | Claude Code | 16.4 | 3.3 | 10.2 | 23.8 | 13.8 | 25.7 | 16.2 | 42.4 |
+| 11 | GLM 5 | OpenCode | 13.9 | 0.8 | 4.2 | 21.5 | 15.2 | 40.3 | 14.6 | 17.4 |
+| 12 | Sonnet 4.5 | Claude Code | 9.9 | 0.8 | 1.0 | 1.8 | 14.6 | 30.9 | 5.0 | 23.0 |
+| - | Base Models | Zero Shot | 7.5 | 1.7 | 1.3 | 1.5 | 8.5 | 20.4 | 9.5 | 12.8 |
 
-"Instruction Tuned" is not directly comparable since it exceeds the 10h + 1 GPU constraint. See the full interactive leaderboard at [posttrainbench.com](http://posttrainbench.com/), which includes OpenCode variants and additional agents.
+"Official Instruct Models" is not directly comparable since it exceeds the 10h + 1 GPU constraint. See the full interactive leaderboard at [posttrainbench.com](http://posttrainbench.com/), which includes OpenCode variants and additional agents.
 
 ## Scaffolds
 
@@ -46,12 +47,6 @@ PostTrainBench includes 7 benchmarks spanning reasoning, tool use, knowledge, ma
 5. **GSM8K** — Grade school math
 6. **HealthBench** — Medical knowledge and reasoning
 7. **HumanEval** — Code generation
-
-## Time Spent on Post-Training
-
-Different CLI agents demonstrate varying levels of persistence. Time spent ranges from ~30 minutes (GPT 5.1 Codex Max on OpenCode) to ~10 hours (Opus 4.6). The chart covers 16 agent configurations across all 4 scaffolds.
-
-![Time Spent](assets/time_spent_v1.png)
 
 ## Quick Start
 
@@ -218,10 +213,10 @@ For Claude Code, we add the following line (Claude Code can run tasks in the bac
 ## Roadmap
 
 - [x] More evaluation tasks (v1: 7 benchmarks, up from 5)
-- [x] More agent scaffolds and agents (v1: 4 scaffolds, 11+ agents)
+- [x] More agent scaffolds and agents (v1: 4 scaffolds, 20+ agent configurations)
 - [ ] Enhanced data decontamination
 - [ ] Enhanced method to detect reward hacking
-- [ ] Ablation studies (e.g., varying compute budgets)
+- [x] Ablation studies (e.g., varying compute budgets)
 
 ## Contact
 
@@ -234,11 +229,13 @@ For Claude Code, we add the following line (Claude Code can run tasks in the bac
 If you found PostTrainBench useful, please cite us as:
 
 ```bibtex
-@inproceedings{posttrainbench_2026,
-  title     = {{PostTrainBench}: Can {LLM} Agents Automate {LLM} Post-Training?},
-  author    = {Rank, Ben and Bhatnagar, Hardik and Prabhu, Ameya and Eisenberg, Shira and Nguyen, Karina and Bethge, Matthias and Andriushchenko, Maksym},
-  booktitle = {ICLR 2026 Workshop on AI with Recursive Self-Improvement (RSI)},
+@article{posttrainbench_2026,
+  title     = {PostTrainBench: Can LLM Agents Automate LLM Post-Training?},
+  author    = {Ben Rank and Hardik Bhatnagar and Ameya Prabhu and Shira Eisenberg and Karina Nguyen and Matthias Bethge and Maksym Andriushchenko},
   year      = {2026},
-  url       = {https://openreview.net/forum?id=FJKOIxkUxo}
+  eprint    = {2603.08640},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.SE},
+  url       = {https://arxiv.org/abs/2603.08640}
 }
 ```
