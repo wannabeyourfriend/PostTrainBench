@@ -13,6 +13,8 @@ LIMIT_PATTERNS = [
     "insufficient_quota",            # OpenAI quota exceeded
     "budget_exceeded",               # General budget error
     "plan does not yet include",     # Z.AI subscription plan restriction
+    "token_expired",                 # OpenAI/Codex expired auth token
+    "Failed to refresh token",       # Codex CLI refresh token failure
 ]
 
 

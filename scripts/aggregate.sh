@@ -26,6 +26,15 @@ python scripts/aggregate_summary.py \
     opencode_opencode_kimi-k2.5_10h_run2 \
     opencode_opencode_minimax-m2.5-free_10h_run2 \
     opencode_zai_glm-5_10h_run2 \
+    codex_non_api_high_gpt-5.3-codex_10h_run1 \
+    codex_non_api_high_gpt-5.3-codex_10h_run2 \
+    codex_non_api_high_gpt-5.3-codex_10h_run3 \
+    codex_non_api_high_gpt-5.4_10h_run1 \
+    codex_non_api_high_gpt-5.4_10h_run2 \
+    codex_non_api_high_gpt-5.4_10h_run3 \
+    claude_non_api_claude-opus-4-6_1m__10h_run1 \
+    claude_non_api_claude-opus-4-6_1m__10h_run2 \
+    claude_non_api_claude-opus-4-6_1m__10h_run3
     # opencode_anthropic_claude-opus-4-5_10h \
     # opencode_opencode_big-pickle_10h \
     # opencode_opencode_gemini-3-pro_10h \

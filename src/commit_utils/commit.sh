@@ -34,6 +34,12 @@ for model in "${models[@]}"; do
             condor_submit_bid 100 -a "agent=codex_non_api" -a "agent_config=gpt-5.3-codex" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
             condor_submit_bid 100 -a "agent=claude_non_api" -a "agent_config=claude-opus-4-6" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
             condor_submit_bid 150 -a "agent=claude_non_api" -a "agent_config=claude-sonnet-4-6" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
+            condor_submit_bid 100 -a "agent=codex_non_api_high" -a "agent_config=gpt-5.3-codex" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
+            condor_submit_bid 100 -a "agent=codex_non_api_high" -a "agent_config=gpt-5.2" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
+            condor_submit_bid 100 -a "agent=claude_non_api" -a "agent_config=claude-opus-4-6[1m]" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
+            condor_submit_bid 100 -a "agent=codex_non_api_high" -a "agent_config=gpt-5.4" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
+            condor_submit_bid 100 -a "agent=codex_non_api_xhigh" -a "agent_config=gpt-5.3-codex" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
+            condor_submit_bid 100 -a "agent=claude_non_api_max" -a "agent_config=claude-opus-4-6" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
             condor_submit_bid 50 -a "agent=claude" -a "agent_config=claude-sonnet-4-5" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=1" src/commit_utils/single_task.sub
             condor_submit_bid 100 -a "agent=gemini" -a "agent_config=models/gemini-3-pro-preview" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
             condor_submit_bid 100 -a "agent=gemini" -a "agent_config=models/gemini-3-flash-preview" -a "eval=$eval" -a "model_to_train=$model" -a "num_hours=10" src/commit_utils/single_task.sub
